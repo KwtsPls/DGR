@@ -105,4 +105,54 @@ public class ResourceMap {
 
         return map;
     }
+
+
+    public void keepTripleFromDictionary(String dictionaryFile){
+        HashSet<String> set = getDictionary(dictionaryFile);
+        if(set==null) return;
+
+        try {
+            String fileName = this.resources.replace(".nt","_dict_only.nt");
+            File ntFile = new File(fileName);
+            ntFile.createNewFile();
+            FileWriter writer = new FileWriter(fileName);
+
+
+            FileInputStream is = new FileInputStream(this.resources);
+            NxParser nxp = new NxParser();
+            nxp.parse(is);
+
+            for (Node[] nx : nxp){
+                if(set.contains(nx[0].toString()) || set.contains(nx[2].toString()))
+                    writer.write(nx[0] + " " + nx[1] + " " + nx[2] + " .\n");
+            }
+
+
+            writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private HashSet<String> getDictionary(String dictionaryFile){
+        HashSet<String> set = new HashSet<>();
+        try {
+            FileInputStream is = new FileInputStream(dictionaryFile);
+            NxParser nxp = new NxParser();
+            nxp.parse(is);
+
+            for (Node[] nx : nxp){
+                set.add(nx[0].toString());
+            }
+
+            return set;
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -37,5 +37,9 @@ public class DGR {
             WKTTransformer wktTransformer = new WKTTransformer(args[1]);
             wktTransformer.transformCRS();
         }
+        else if(args[0].equals("KeepTriples")){
+            ResourceMap resourceMap = new ResourceMap(args[1]);
+            resourceMap.keepTripleFromDictionary(args[2]);
+        }
     }
 }
