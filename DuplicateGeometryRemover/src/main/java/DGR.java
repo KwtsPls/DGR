@@ -32,6 +32,11 @@ public class DGR {
             GeometryLocator geometryLocator = new GeometryLocator(args[1]);
             geometryLocator.removeDuplicatesByArea();
         }
+        else if(args[0].equals("DeduplicateByRemovingGADM")){
+            GeometryLocator geometryLocator = new GeometryLocator(args[1]);
+            geometryLocator.findDuplicates();
+            geometryLocator.removeDuplicates();
+        }
         // TODO - merge with TransformTo4326 - right now only works with 2100 to 4326
         else if(args[0].equals("TransformTo4326")){
             WKTTransformer wktTransformer = new WKTTransformer(args[1]);
