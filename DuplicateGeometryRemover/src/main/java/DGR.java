@@ -34,6 +34,7 @@ public class DGR {
         }
         else if(args[0].equals("DeduplicateByRemovingGADM")){
             GeometryLocator geometryLocator = new GeometryLocator(args[1]);
+            geometryLocator.selectGeometries();
             geometryLocator.findDuplicates();
             geometryLocator.removeDuplicates();
         }
