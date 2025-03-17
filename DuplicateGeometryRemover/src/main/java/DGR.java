@@ -41,5 +41,9 @@ public class DGR {
             ResourceMap resourceMap = new ResourceMap(args[1]);
             resourceMap.keepTripleFromDictionary(args[2]);
         }
+        else if(args[0].equals("TransformLinestringsToPolygons")){
+            WKTTransformer transformer = new WKTTransformer(args[1]);
+            transformer.transformLinestringsToPolygons();
+        }
     }
 }
